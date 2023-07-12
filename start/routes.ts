@@ -50,7 +50,7 @@ Route.group(()=>{
   Route.get('/find','ProductsController.find')
   Route.get('/find/:id','ProductsController.findparam')
   Route.put('/update','ProductsController.update')
-  Route.delete('/','ProductsController.delete')
+  Route.delete('/:id','ProductsController.delete')
 }).prefix('/products')
 //sales table
 Route.group(()=>{

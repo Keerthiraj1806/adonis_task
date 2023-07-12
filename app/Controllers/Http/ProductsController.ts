@@ -56,20 +56,21 @@ export default class ForstudentsController {
         }
     }
 //delete
-    public async delete({request}:HttpContextContract){
-        const selectedProduct=schema.create({
-            productId:schema.number()
-        })
-        const message={'*':(rule,field)=>{return `${rule} error at ${field}`}}
-        const payload=await request.validate({schema:selectedProduct,messages:message})
+    public async delete({request,params}:HttpContextContract){
+        // const selectedProduct=schema.create({
+        //     productId:schema.number()
+        // })
+        // const message={'*':(rule,field)=>{return `${rule} error at ${field}`}}
+        // const payload=await request.validate({schema:selectedProduct,messages:message})
 //request id == product id
-        const oldProduct=await Product.findBy('productId',payload['productId'])
+        const product=params.id
+        const oldProduct=await Product.findBy('productId',product)
         if(oldProduct){
             await oldProduct.delete()
         }
         else
         {
-            return `Given productID ${payload.productId} not found!`
+            return `Given productID ${product} not found!`
         }
 }
 }

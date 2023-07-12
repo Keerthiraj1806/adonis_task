@@ -21,9 +21,13 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 
-Route.get('/', async () => {
+Route
+  .get('/', async () => {
   return { hello: 'world' }
 })
+.middleware(async (ctx, next) => {
+  console.log(`Inside middleware ${ctx.request.url()}`)
+  await next()})
 //trying group
 //Route.group(()=>{
 //  Route.get('/:id',async({params})=>{
@@ -45,7 +49,7 @@ Route.group(()=>{
   Route.post('/','ProductsController.insert')
   Route.get('/find','ProductsController.find')
   Route.get('/find/:id','ProductsController.findparam')
-  Route.patch('/update','ProductsController.update')
+  Route.put('/update','ProductsController.update')
   Route.delete('/','ProductsController.delete')
 }).prefix('/products')
 //sales table

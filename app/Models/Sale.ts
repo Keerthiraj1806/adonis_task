@@ -5,7 +5,7 @@ export default class Sale extends BaseModel {
   @column({ isPrimary: true })
   public salesId: number
 
-  @column()
+  @column({})
   public customerId: number
 
   @column()

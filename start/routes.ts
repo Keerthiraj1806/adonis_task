@@ -51,6 +51,7 @@ Route.group(()=>{
   Route.get('/find/:id','ProductsController.findparam')
   Route.put('/update','ProductsController.update')
   Route.delete('/:id','ProductsController.delete')
+  Route.get('/search/','ProductsController.search')
 }).prefix('/products')
 //sales table
 Route.group(()=>{

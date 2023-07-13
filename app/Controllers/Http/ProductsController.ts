@@ -73,4 +73,16 @@ export default class ForstudentsController {
             return `Given productID ${product} not found!`
         }
 }
+//search function
+public async search({request,response}:HttpContextContract){
+        const { searchQuery }=request.all()
+        console.log(searchQuery)
+        const searchProduct=await Product.query()
+                                    .select('*')
+                                    .from('products')
+                                    .whereRaw('product_id::text ILIKE ?',`%${searchQuery}%`)
+                                    .orWhere('product_name','ILIKE',`%${searchQuery}%`)
+                                    .orWhereRaw('product_price::text ILIKE ?',`%${searchQuery}%`)
+        return response.json(searchProduct)
+}
 }
